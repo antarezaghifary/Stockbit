@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_navigation"
+    app:startDestination="@id/watchlistFragment">
+
+    <fragment
+        android:id="@+id/watchlistFragment"
+        android:name="com.stockbit.hiring.ui.fragment.Watchlist.Watchlist.WatchlistFragment"
+        android:label="Watchlist"
+        tools:layout="@layout/fragment_watchlist">
+    </fragment>
+
+    <fragment
+        android:id="@+id/streamFragment"
+        android:name="com.stockbit.hiring.ui.fragment.Stream.StreamFragment"
+        android:label="Watchlist"
+        tools:layout="@layout/fragment_stream">
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.stockbit.hiring.ui.fragment.Search.SearchFragment"
+        android:label="Watchlist"
+        tools:layout="@layout/fragment_search">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.stockbit.hiring.ui.fragment.Chat.ChatFragment"
+        android:label="Watchlist"
+        tools:layout="@layout/fragment_chat">
+    </fragment>
+
+    <fragment
+        android:id="@+id/portfolioFragment"
+        android:name="com.stockbit.hiring.ui.fragment.Portfolio.PortfolioFragment"
+        android:label="Watchlist"
+        tools:layout="@layout/fragment_portfolio">
+    </fragment>
+
+</navigation>
