@@ -30,6 +30,7 @@ class WatchlistSource(
         callback: LoadInitialCallback<Int, TotalTop>
     ) {
         Log.e("debug", "debug: CALL")
+
         networkSyncReverse(
             saveToDb = { dao.addAll(it) },
             fetchDb = { dao.getAll(1) },
@@ -49,7 +50,8 @@ class WatchlistSource(
         )
             .compose(composeObservable())
             .subscribe({
-                if (it.isNotEmpty()) {
+
+            if (it.isNotEmpty()) {
                     totaltoptiervolfullState.postValue(VmData.success(it))
                     callback.onResult(it, 0, 1)
                 } else {

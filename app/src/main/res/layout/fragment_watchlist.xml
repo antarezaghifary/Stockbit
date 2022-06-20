@@ -24,7 +24,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_menu"
-                android:tint="@color/grey" />
+                android:tint="@color/grey"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="80dp"
@@ -42,59 +43,60 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_article"
-                android:tint="@color/grey" />
+                android:tint="@color/grey"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </RelativeLayout>
 
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="40dp"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:orientation="horizontal">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:orientation="horizontal">-->
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All Watchlist" />
+    <!--            <androidx.appcompat.widget.AppCompatTextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="All Watchlist" />-->
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_arrow_down" />
+    <!--            <androidx.appcompat.widget.AppCompatImageView-->
+    <!--                android:layout_width="32dp"-->
+    <!--                android:layout_height="32dp"-->
+    <!--                android:src="@drawable/ic_arrow_down" />-->
 
-        </LinearLayout>
+    <!--        </LinearLayout>-->
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:orientation="horizontal">-->
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_arrow_down" />
+    <!--            <androidx.appcompat.widget.AppCompatImageView-->
+    <!--                android:layout_width="32dp"-->
+    <!--                android:layout_height="32dp"-->
+    <!--                android:src="@drawable/ic_arrow_down" />-->
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All Watchlist" />
+    <!--            <androidx.appcompat.widget.AppCompatTextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="All Watchlist" />-->
 
-        </LinearLayout>
+    <!--        </LinearLayout>-->
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -112,12 +114,12 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/progress_bottom"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:indeterminate="true"
-        tools:visibility="visible" />
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progress_bottom"-->
+    <!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="24dp"-->
+    <!--        android:indeterminate="true"-->
+    <!--        tools:visibility="visible" />-->
 
 </LinearLayout>

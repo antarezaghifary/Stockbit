@@ -15,7 +15,6 @@ sealed class VmData<T : Any> {
         fun <T : Any> empty(): VmData<T> = Empty()
         fun <T : Any> fail(throwable: Throwable, message: String?): VmData<T> =
             Failure(throwable, message)
-
         fun <T : Any> LoadMore(): VmData<T> = LoadMore()
     }
 }
