@@ -6,12 +6,10 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.oratakashi.viewbinding.core.binding.recyclerview.ViewHolder
 import com.oratakashi.viewbinding.core.binding.recyclerview.viewBinding
-import com.stockbit.hiring.data.database.totaltop
-import com.stockbit.hiring.data.model.totaltoptiervolfull.DataItem
+import com.stockbit.hiring.data.database.TotalTop
 import com.test.stockbit.databinding.ItemListBinding
 
-class WatchlistAdaper (
-) : PagedListAdapter<DataItem, ViewHolder<ItemListBinding>>(DIFF_CALLBACK) {
+class WatchlistAdaper : PagedListAdapter<TotalTop, ViewHolder<ItemListBinding>>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -21,40 +19,38 @@ class WatchlistAdaper (
     override fun onBindViewHolder(holder: ViewHolder<ItemListBinding>, position: Int) {
         with(holder.binding) {
             getItem(position)?.let {
-                tvName.text = it.coinInfo?.name
-                tvNamePt.text = it.coinInfo?.fullName
-                tvPrice.text = it.rAW?.uSD?.pRICE
-                tvIncrease.text = it.rAW?.uSD?.cHANGEHOUR
+                tvName.text = it.name
+                tvNamePt.text = it.fullname
+                tvPrice.text = it.price
+                tvIncrease.text = it.changeHouse
             }
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
-            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TotalTop>() {
+            override fun areItemsTheSame(oldItem: TotalTop, newItem: TotalTop): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-                return oldItem.coinInfo?.id == newItem.coinInfo?.id
+            override fun areContentsTheSame(oldItem: TotalTop, newItem: TotalTop): Boolean {
+                return (oldItem.id == newItem.id) &&
+                        (oldItem.price == newItem.price) &&
+                        (oldItem.name == newItem.name) &&
+                        (oldItem.changeHouse == newItem.changeHouse) &&
+                        (oldItem.fullname == newItem.fullname)
             }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addAll(data: MutableList<totaltop?>) {
+    fun addAll(data: MutableList<TotalTop?>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
     }
 
-    private val data: MutableList<totaltop?> by lazy {
+    private val data: MutableList<TotalTop?> by lazy {
         ArrayList()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun clear() {
-        data.clear()
-        notifyDataSetChanged()
     }
 }

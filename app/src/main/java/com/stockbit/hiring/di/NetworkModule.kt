@@ -1,18 +1,19 @@
-package com.stockbit.hiring.data.network
+package com.stockbit.hiring.di
 
 import com.oratakashi.viewbinding.core.tools.retrofit.createOkHttpClient
 import com.oratakashi.viewbinding.core.tools.retrofit.createReactiveService
+import com.stockbit.hiring.data.network.MyApi
+import org.koin.dsl.module
 
-object Api {
-    fun getApi(): MyApi {
-        return createReactiveService(
+val networkModule = module {
+    single {
+        createReactiveService(
             MyApi::class.java,
             createOkHttpClient(
-                //arrayOf()
-                interceptors = arrayOf(),
-                authenticator = null,
-                showDebugLog = true,
-                pinner = null
+                arrayOf(),
+                null,
+                null,
+                true
             ),
             "https://min-api.cryptocompare.com/data/top/"
         )

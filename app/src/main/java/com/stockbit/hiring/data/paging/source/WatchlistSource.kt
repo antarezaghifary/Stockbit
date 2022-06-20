@@ -1,22 +1,25 @@
 package com.stockbit.hiring.data.paging.source
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import com.oratakashi.viewbinding.core.tools.retrofit.transformer.composeSingle
-import com.stockbit.hiring.data.model.totaltoptiervolfull.DataItem
+import com.oratakashi.viewbinding.core.network.networkSyncReverse
+import com.oratakashi.viewbinding.core.tools.retrofit.transformer.composeObservable
+import com.stockbit.hiring.data.database.TotalTop
+import com.stockbit.hiring.data.database.TotalTopDao
 import com.stockbit.hiring.data.repository.UserRepository
 import com.stockbit.hiring.util.VmData
 import io.reactivex.disposables.CompositeDisposable
-import org.json.JSONObject
-import retrofit2.HttpException
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class WatchlistSource (
-    private val totaltoptiervolfullState: MutableLiveData<VmData<List<DataItem>>>
-) : PageKeyedDataSource<Int, DataItem>() {
+class WatchlistSource(
+    private val totaltoptiervolfullState: MutableLiveData<VmData<List<TotalTop>>>
+) : PageKeyedDataSource<Int, TotalTop>(), KoinComponent {
 
-    private val repository: UserRepository by lazy {
-        UserRepository()
-    }
+    private val repository: UserRepository by inject()
+
+    private val dao: TotalTopDao by inject()
 
     private val compositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
@@ -24,42 +27,82 @@ class WatchlistSource (
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, DataItem>
+        callback: LoadInitialCallback<Int, TotalTop>
     ) {
-
-        totaltoptiervolfullState.postValue(VmData.loading())
-        repository.totalTopTierVolFull(1).compose(composeSingle())
+        Log.e("debug", "debug: CALL")
+        networkSyncReverse(
+            saveToDb = { dao.addAll(it) },
+            fetchDb = { dao.getAll(1) },
+            fetchApi = { repository.totalTopTierVolFull(1) },
+            mapData = { data ->
+                data.map {
+                    TotalTop(
+                        it.coinInfo?.name,
+                        it.coinInfo?.fullName,
+                        it.rAW?.uSD?.pRICE,
+                        it.rAW?.uSD?.cHANGEHOUR,
+                        1,
+                        it.coinInfo?.id.orEmpty()
+                    )
+                }
+            }
+        )
+            .compose(composeObservable())
             .subscribe({
                 if (it.isNotEmpty()) {
                     totaltoptiervolfullState.postValue(VmData.success(it))
-                    callback.onResult(it, 1, 2)
-                } else totaltoptiervolfullState.postValue(VmData.empty())
-            }, {
-                if (it is HttpException) {
-                    it.response()?.errorBody()?.string()?.let { response ->
-                        val message = JSONObject(response).getString("message")
-                        totaltoptiervolfullState.value = VmData.fail(it, message)
-                    }
+                    callback.onResult(it, 0, 1)
+                } else {
+                    totaltoptiervolfullState.postValue(VmData.empty())
                 }
-            }).let { return@let compositeDisposable::add }
+            }, {
+                it.printStackTrace()
+                Log.e("debug", "debug: ${it.message}")
+                totaltoptiervolfullState.postValue(VmData.fail(it, it.message))
+            })
+            .let { return@let compositeDisposable::add }
     }
 
     override fun loadBefore(
         params: LoadParams<Int>,
-        callback: LoadCallback<Int, DataItem>
+        callback: LoadCallback<Int, TotalTop>
     ) {
         //authentification
     }
 
     override fun loadAfter(
         params: LoadParams<Int>,
-        callback: LoadCallback<Int, DataItem>
+        callback: LoadCallback<Int, TotalTop>
     ) {
-        repository.totalTopTierVolFull(params.key).compose(composeSingle())
+        Log.e("debug", "debug: ${params.key}")
+        networkSyncReverse(
+            saveToDb = { dao.addAll(it) },
+            fetchDb = { dao.getAll(params.key + 1) },
+            fetchApi = { repository.totalTopTierVolFull(params.key + 1) },
+            mapData = { data ->
+                data.map {
+                    TotalTop(
+                        it.coinInfo?.name,
+                        it.coinInfo?.fullName,
+                        it.rAW?.uSD?.pRICE,
+                        it.rAW?.uSD?.cHANGEHOUR,
+                        params.key + 1,
+                        it.coinInfo?.id.orEmpty()
+                    )
+                }
+            }
+        )
+            .compose(composeObservable())
             .subscribe({
-                callback.onResult(it, params.key + 1)
+                if (it.isNotEmpty()) {
+                    totaltoptiervolfullState.postValue(VmData.success(it))
+                    callback.onResult(it, params.key + 1)
+                } else {
+                    totaltoptiervolfullState.postValue(VmData.empty())
+                }
             }, {
-                it.printStackTrace()
-            }).let { return@let compositeDisposable::add }
+
+            })
+            .let { return@let compositeDisposable::add }
     }
 }

@@ -7,14 +7,14 @@
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.133" />
         <entry key="app/src/main/res/drawable/ic_headset.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/layout/custom_toast_layout.xml" value="0.2064814814814815" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/fragment_portfolio.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/fragment_stream.xml" value="0.21927083333333333" />
-        <entry key="app/src/main/res/layout/fragment_watchlist.xml" value="0.14" />
+        <entry key="app/src/main/res/layout/fragment_watchlist.xml" value="0.16" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.18" />
       </map>
