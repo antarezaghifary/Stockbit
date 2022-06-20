@@ -106,5 +106,8 @@ dependencies {
     kapt 'android.arch.persistence.room:compiler:1.1.1'
     //optional, for rx java purpose
     implementation 'android.arch.persistence.room:rxjava2:1.1.1'
+    implementation 'com.airbnb.android:lottie:3.4.0'
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
 }

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +51,7 @@ class WatchlistFragment : Fragment() {
                 swipeRefresh.isRefreshing = false
             }
         }
+        setObservableWatchlist()
     }
 
 
@@ -59,22 +59,21 @@ class WatchlistFragment : Fragment() {
         viewModel.totaltoptiervolfullState.observe(viewLifecycleOwner) {
             when (it) {
                 is VmData.Loading -> {
-                    Log.e("TAG", "setObservableWatchlist: ")
-                    toast("Loading . . .")
                     binding.swipeRefresh.isRefreshing = true
+                    binding.img.visibility = View.GONE
                 }
                 is VmData.Success -> {
                     binding.swipeRefresh.isRefreshing = false
+                    binding.img.visibility = View.GONE
                 }
                 is VmData.Empty -> {
                     binding.swipeRefresh.isRefreshing = false
+                    binding.img.visibility = View.VISIBLE
                 }
                 is VmData.Failure -> {
                     toast("${it.message}")
                     binding.swipeRefresh.isRefreshing = false
-                }
-                is VmData.LoadMore -> {
-                    toast("Tunggu . . .")
+                    binding.img.visibility = View.GONE
                 }
             }
 
@@ -117,6 +116,5 @@ class WatchlistFragment : Fragment() {
             viewLifecycleOwner
         )
         binding.swipeRefresh.isEnabled = true
-        setObservableWatchlist()
     }
 }

@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/fragment_portfolio.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/fragment_stream.xml" value="0.21927083333333333" />
-        <entry key="app/src/main/res/layout/fragment_watchlist.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/fragment_watchlist.xml" value="0.12" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.18" />
       </map>

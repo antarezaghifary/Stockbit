@@ -31,6 +31,7 @@ class WatchlistSource(
     ) {
         Log.e("debug", "debug: CALL")
 
+        totaltoptiervolfullState.postValue(VmData.loading())
         networkSyncReverse(
             saveToDb = { dao.addAll(it) },
             fetchDb = { dao.getAll(1) },
@@ -76,6 +77,7 @@ class WatchlistSource(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, TotalTop>
     ) {
+        totaltoptiervolfullState.postValue(VmData.loading())
         Log.e("debug", "debug: ${params.key}")
         networkSyncReverse(
             saveToDb = { dao.addAll(it) },

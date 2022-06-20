@@ -6,7 +6,6 @@ sealed class VmData<T : Any> {
     class Empty<T : Any> : VmData<T>()
     data class Success<T : Any>(val data: T) : VmData<T>()
     data class Failure<T : Any>(val throwable: Throwable?, val message: String?) : VmData<T>()
-    class LoadMore<T : Any> : VmData<T>()
 
     companion object {
         fun <T : Any> loading(): VmData<T> = Loading()
@@ -15,6 +14,5 @@ sealed class VmData<T : Any> {
         fun <T : Any> empty(): VmData<T> = Empty()
         fun <T : Any> fail(throwable: Throwable, message: String?): VmData<T> =
             Failure(throwable, message)
-        fun <T : Any> LoadMore(): VmData<T> = LoadMore()
     }
 }
