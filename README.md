@@ -1,0 +1,3 @@
+# Stockbit
+
+Technical Test Stockbit😎
